@@ -1,0 +1,15 @@
+
+# Change Log
+All notable changes to this project will be documented in this file.
+ 
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
+ 
+## [0.0.1-alpha+2d64b965cde6aa282bd2d61e5a9e5095] - 2026-05-11
+ 
+First push and first addition of Dockerfiles for backend
+### Added
+- Dockerfiles/docker-compose.yml
+- Dockerfiles/mariadb-init/init.sql
+- Dockerfiles/nginx.conf
+- Dockerfiles/setup.sh
