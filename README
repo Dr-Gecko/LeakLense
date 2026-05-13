@@ -4,7 +4,7 @@
 LeakLense is a data visualization tool specifically target towards data breaches. It helps you view the data you have related to breaches, query specific information, build maps, assist with OSINT/HUMINT
 ## Acknowledgements
 
- - [Tabler](https://github.com/tabler/tabler$0)
+ - [Tabler](https://github.com/tabler/tabler)
 ## Run Locally
 
 Clone the project
@@ -35,7 +35,11 @@ Start LeakLense
 ```
 
 
+## Feedback
+
+Feature requests, bugs, security defects, etc should all be made into issues with the correct corresponding tags. 
+
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
