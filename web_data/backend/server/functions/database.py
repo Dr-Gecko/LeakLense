@@ -43,15 +43,19 @@ def _fetch_all_sync(statement: str,params: Sequence[Any] | None = None,database:
         close_connection(connection)
 
 
-def _fetch_one_sync(statement: str,params: Sequence[Any] | None = None,database: str | None = None) -> Any:
+def _fetch_one_sync(statement, params=None, database=None):
     connection = make_connection(database)
+
     try:
-        cursor = connection.cursor(dictionary=True)
+        cursor = connection.cursor(dictionary=True, buffered=True)
+
         try:
             cursor.execute(statement, params)
             return cursor.fetchone()
         finally:
+            cursor.fetchall()  # clears unread results
             cursor.close()
+
     finally:
         close_connection(connection)
 

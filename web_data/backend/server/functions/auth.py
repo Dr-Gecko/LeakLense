@@ -8,6 +8,7 @@ import functions.utils as utils
 from argon2 import PasswordHasher
 import functions.database as database
 from fastapi import Response, status,Request
+import mysql.connector.errors as msqlerrors
 
 auth_role_layout={
     "owner":10,
@@ -24,17 +25,17 @@ async def create_user(request:Request):
         request_ip = request.headers.get("X-Forwarded-For") or request.client.host
         ph=PasswordHasher()
         password_hash=ph.hash(password)
-        insert_sql = """INSERT INTO users (username, hash, last_login_ip, auth_token, auth_token_expire, role) VALUES (%s, %s, %s, %s, %s, %s);"""
-        params = (username, password_hash, request_ip, None, None, "user")
+        insert_sql = """INSERT INTO users (username, hash, role, rbac_id, user_avatar_path, last_login_ip) VALUES (%s, %s, %s, %s, %s, %s);"""
+        params = (username, password_hash, "user", 0, "/dist/img/default.png",request_ip)
         rows_affected = await database.execute(insert_sql, params)
-        print(username)
         if rows_affected==1:
-            print(utils.format_response({"message":f"created user {username}"}))
             return utils.format_response({"message":f"created user {username}"})
         else:
             return utils.format_response({"response":"failed to create user"},status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,reason="failed")
+    except msqlerrors.IntegrityError as error:
+        if error.errno == 1062:
+            return utils.format_response({"response": "username already exists"},status_code=status.HTTP_409_CONFLICT,reason="failed")
     except Exception as error:
-        print(error)
         utils.format_response({"response":"failed to create user"},status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,reason="failed")
 
 async def login_user(request:Request):
@@ -54,9 +55,14 @@ async def login_user(request:Request):
             exp_time = expiry_dt.strftime('%Y-%m-%d %H:%M:%S') 
             statement="UPDATE users SET auth_token = %s, last_login_ip = %s, auth_token_expire = %s WHERE username  = %s;"
             params=(auth_token,ip,exp_time,username)
-            affected_rows=await database.execute(statement,params)
+            affected_rows=await database.execute(statement,params)    
             if affected_rows > 0:
-                return utils.format_response({"response":"logged in successfully to create user","token":auth_token,"expire_time":exp_time})
+                pull_user_info_sql="SELECT user_id,username,role as user_role, user_avatar_path as avatar FROM users WHERE username = %s;"
+                params=(username,)
+                data=await database.fetch_one(pull_user_info_sql,params)
+                
+                
+                return utils.format_response(reason="logged in successfully",data={"token":auth_token,"expire_time":exp_time,"user_data":data})
             else:
                 return utils.format_response({"response":"internal error"},status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,reason="failed")
     except argon2.exceptions.VerifyMismatchError as error:
@@ -64,7 +70,8 @@ async def login_user(request:Request):
     except AttributeError:
         return utils.format_response({"response":"incorrect username or password"},status_code=status.HTTP_401_UNAUTHORIZED,reason="failed")
     except Exception as error:
-        return utils.format_response({"response":"failed to create user"},status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,reason="failed")
+        print(error)
+        return utils.format_response({"response":f"failed to login user {error}"},status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,reason="failed")
 
 async def verify_auth_get_role(auth_token):
     try:
