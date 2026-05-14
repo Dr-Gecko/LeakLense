@@ -96,7 +96,6 @@ async def deleteUser(authToken, request:Request):
             return False,utils.formatResponse({"response":"API key invalid"},status_code=status.HTTP_401_UNAUTHORIZED)
         if verified[2]<required_role:
             return False,utils.format_rformatResponseesponse({"response":"invalid permissions"},status_code=status.HTTP_401_UNAUTHORIZED)
-        
         affected_rows=await database.execute("DELETE FROM users WHERE username = %s;",(userToDelete,))
         if affected_rows > 0:
             return utils.formatResponse({"response":f"deleted {userToDelete}"})
