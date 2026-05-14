@@ -7,9 +7,27 @@ from fastapi.responses import JSONResponse
 from fastapi.openapi.utils import get_openapi
 
 load_dotenv()
-
-
-def format_response(data: Any = None, status_code: int = status.HTTP_200_OK, reason: str = "success"):
+allowedSelfEditColumns = {
+    "email",
+    "avatar",
+    "password",
+}
+allowedManagerEditColumns = {
+    "email",
+    "avatar",
+    "last_login_ip",
+    "password",
+    "role"
+}
+rbac_reference = {
+    "user":0,
+    "contributer":1,
+    "manager":2,
+    "admin":3,
+    "owner":4,
+    "root":5
+}
+def formatResponse(data: Any = None, status_code: int = status.HTTP_200_OK, reason: str = "success"):
     return JSONResponse(
         status_code=status_code,
         content={

@@ -7,4 +7,4 @@ __pycache__
 data
 EXAMPLE_CHANGELOG.md
 dev/
-*test*
+*test*.py

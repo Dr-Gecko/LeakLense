@@ -21,10 +21,10 @@ services:
       - ${PWD}/../web_data/backend/server:/app
     working_dir: /app
     environment:
-      mysql_host: 192.168.234.19
-      sql_port: 3306
-      mysql_user: gecko
-      mysql_password: password
+      mysql_host: ${mysql_host}
+      sql_port: ${mysql_port}
+      mysql_user: ${mysql_user}
+      mysql_password: ${mysql_password}
       mysql_db: breaches
       mysql_backend_db: backend
     command: uvicorn main:app --host 0.0.0.0 --port 8080 --reload

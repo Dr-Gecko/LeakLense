@@ -6,24 +6,30 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
 @router.post("/register")
-async def register(request: Request):
+async def routeRegister(request: Request):
     try:
-        return await auth.create_user(request)
+        return await auth.createUser(request)
     except Exception:
-        return utils.format_response({"message": "Registration failed"},status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,reason="failed")
+        return utils.formatResponse(reason="Registration failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @router.post("/login")
-async def login(request: Request):
+async def routeLogin(request: Request):
     try:
-        return await auth.login_user(request)
+        return await auth.loginUser(request)
     except Exception:
-        return utils.format_response(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,reason="failed")
+        return utils.formatResponse(reason="Login failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@router.get("/users/list")
+async def routeListPublicUsers(request: Request, api_key: str = Header(..., alias="API-KEY")):
+    try:
+        return await auth.getUsersPublic(api_key)
+    except Exception:
+        return utils.formatResponse(reason="failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @router.put("/user/edit")
-async def edit_user(request: Request, api_key: str = Header(..., alias="API-KEY")):
+async def routeEditUser(request: Request, api_key: str = Header(..., alias="API-KEY")):
     try:
-        return await auth.update_user(api_key, request)
+        return await auth.updateUser(api_key,request)
     except Exception:
         return utils.format_response(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -32,20 +38,9 @@ async def edit_user(request: Request, api_key: str = Header(..., alias="API-KEY"
 
 
 @router.delete("/user/delete")
-async def delete_user(request: Request, api_key: str = Header(..., alias="API-KEY")):
+async def routeDeleteUser(request: Request, api_key: str = Header(..., alias="API-KEY")):
     try:
         return await auth.delete_user(api_key, request)
-    except Exception:
-        return utils.format_response(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            reason="failed"
-        )
-
-
-@router.get("/users")
-async def get_all_users(api_key: str = Header(..., alias="API-KEY")):
-    try:
-        return await auth.get_all_users(api_key)
     except Exception:
         return utils.format_response(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
