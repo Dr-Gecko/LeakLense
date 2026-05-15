@@ -4,9 +4,9 @@ import datetime
 import traceback
 from uuid import uuid4
 from base64 import b64encode
-import functions.utils as utils
 from argon2 import PasswordHasher
-import functions.database as database
+import functions.helpers.utils as utils
+import functions.helpers.database as database
 from fastapi import Response, status,Request
 import mysql.connector.errors as msqlerrors
 
@@ -49,12 +49,18 @@ async def loginUser(request:Request):
 
 async def verifyAuthRole(authToken):
     try:
-        authTokenData = await database.fetch_one("SELECT auth_token_expire, username, rbac_id FROM users WHERE auth_token = %s",params=(authToken,))
-        if authTokenData['auth_token_expire'].timestamp()>=time.time(): return True, authTokenData['username'], authTokenData['rbac_id']
+        authTokenData = await database.fetch_one("SELECT auth_token_expire, username, rbac_id, user_id FROM users WHERE auth_token = %s",params=(authToken,))
+        if authTokenData['auth_token_expire'].timestamp()>=time.time(): return True, authTokenData['username'], authTokenData['rbac_id'], authTokenData['user_id']
         else: return False, utils.formatResponse(reason="API Key Expired",status_code=status.HTTP_401_UNAUTHORIZED)
     except TypeError: return False,utils.formatResponse(reason="API key invalid",status_code=status.HTTP_401_UNAUTHORIZED)
     except Exception: return False,utils.formatResponse(reason="failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+async def _updateUserColumn(userID, column, data):
+    query=f"UPDATE users SET `{column}` = %s WHERE user_id = %s"
+    affectedRows = await database.execute(query,(data, userID))
+    if affectedRows > 0: return True 
+    else: return False
+    
 async def updateUser(authToken, request:Request):
     try:
         jsonData = await request.json()
@@ -72,6 +78,17 @@ async def updateUser(authToken, request:Request):
     except TypeError: return utils.formatResponse(reason="API key invalid",status_code=status.HTTP_401_UNAUTHORIZED)
     except Exception: return utils.formatResponse(reason="failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+async def getUserInfo(authToken):
+    try:
+        requiredRole = 0
+        verifiedUser = await verifyAuthRole(authToken)
+        if verifiedUser[0]!=True: return verifiedUser[1]
+        if verifiedUser[2] < requiredRole: return utils.formatResponse(reason="invalid permissions",status_code=status.HTTP_401_UNAUTHORIZED)
+        userInfo = await database.fetch_one("SELECT username, user_id, role, user_avatar_path FROM users WHERE user_id = %s",(verifiedUser[3],))
+        return utils.formatResponse({"user_info":userInfo})
+    except TypeError: return utils.formatResponse(reason="API key invalid",status_code=status.HTTP_401_UNAUTHORIZED)
+    except Exception: 
+        return utils.formatResponse(reason="failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 async def getUsersPublic(authToken):
     try:

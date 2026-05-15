@@ -29,9 +29,10 @@
 
 <body>
 	<script src="./dist/js/demo-theme.min.js"></script>
-	<script src="./dist/customjs/settings.js?v=1.0.5"></script>
-	<script src="./dist/customjs/leaklense.js?v=1.0.9"></script>
-	<script src="./dist/customjs/leaklensedebug.js?v=0.0.1"></script>
+	<script src="./dist/customjs/settings.js?v=0.0.17"></script>
+	<script src="./dist/customjs/leaklense.js?v=1.0.10"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
 	<div class="page">
 		<!-- Navbar -->
 		<header class="navbar navbar-expand-md d-print-none">
@@ -268,13 +269,13 @@
 							<div class="modal-body">
 								<div class="mb-3">
 									<div class="form-label">New Avatar</div>
-									<input type="file" class="form-control">
+									<input type="file" id="avatarFile" class="form-control">
 								</div>
 							</div>
 							<div class="modal-footer">
 								<a href="#" class="btn btn-link link-secondary btn-3" data-bs-dismiss="modal"> Cancel
 								</a>
-								<a href="#" class="btn btn-primary btn-5 ms-auto" data-bs-dismiss="modal">
+								<a href="#" id="submitAvatar" class="btn btn-primary btn-5 ms-auto" data-bs-dismiss="modal">
 									<!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 										fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

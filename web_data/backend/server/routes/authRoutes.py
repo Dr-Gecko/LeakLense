@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request, Header, status
 import functions.auth as auth
-import functions.utils as utils
+import functions.helpers.utils as utils
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -19,11 +19,19 @@ async def routeLogin(request: Request):
     except Exception:
         return utils.formatResponse(reason="Login failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-@router.get("/users/list")
+@router.get("/list")
 async def routeListPublicUsers(request: Request, api_key: str = Header(..., alias="API-KEY")):
     try:
         return await auth.getUsersPublic(api_key)
     except Exception:
+        return utils.formatResponse(reason="failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@router.get("/info")
+async def getUserInfo(api_key: str = Header(..., alias="API-KEY")):
+    try:
+        return await auth.getUserInfo(api_key)
+    except Exception as error:
+        print(error)
         return utils.formatResponse(reason="failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @router.put("/user/edit")

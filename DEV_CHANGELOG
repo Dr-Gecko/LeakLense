@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ### Fixed
-- Updated auth.py to follow new standard and fix old bugs ([#1](https://github.com/Dr-Gecko/LeakLense/issues/1))
+- Updated auth.py to follow new standard and fix old bugs ([#1](https://github.com/Dr-Gecko/LeakLense/issues/1))([#4](https://github.com/Dr-Gecko/LeakLense/issues/4))
 
 
 
