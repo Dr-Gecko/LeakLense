@@ -60,6 +60,30 @@ async def _updateUserColumn(userID, column, data):
     affectedRows = await database.execute(query,(data, userID))
     if affectedRows > 0: return True 
     else: return False
+   
+async def selfUpdate(authToken, request:Request):
+    try:
+        jsonData = await request.json()
+        verified = await verifyAuthRole(authToken)        
+        userToEdit = verified[1]
+        columnToEdit = jsonData['update']
+        newData = jsonData['data']
+        if verified[0]!=True: return verified[1]         
+        requiredRole, allowedColumns = (0, utils.allowedSelfEditColumns) if userToEdit == verified[1] else (2, utils.allowedManagerEditColumns)        
+        if verified[2] < requiredRole: return utils.formatResponse(reason="invalid permissions",status_code=status.HTTP_401_UNAUTHORIZED)
+        if columnToEdit not in allowedColumns: return utils.formatResponse(reason="invalid permissions",status_code=status.HTTP_401_UNAUTHORIZED)
+        if columnToEdit=="password":
+            passwordHasher = PasswordHasher()
+            passwordHash = passwordHasher.hash(newData)
+            newData=passwordHash
+            columnToEdit="hash"   
+        updatedAffectedRows = await database.execute(f"UPDATE users SET `{columnToEdit}` = %s WHERE user_id = %s;", (newData, verified[3]))
+        if updatedAffectedRows > 0: return utils.formatResponse(reason=f"successfully updated colum: {columnToEdit} for user: {userToEdit}")
+        else: return utils.formatResponse(reason="internal error",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    except TypeError: return utils.formatResponse(reason="API key invalid",status_code=status.HTTP_401_UNAUTHORIZED)
+    except Exception as error: 
+        print(error)
+        return utils.formatResponse(reason="failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)   
     
 async def updateUser(authToken, request:Request):
     try:

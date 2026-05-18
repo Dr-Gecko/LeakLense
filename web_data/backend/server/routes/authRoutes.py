@@ -34,6 +34,14 @@ async def getUserInfo(api_key: str = Header(..., alias="API-KEY")):
         print(error)
         return utils.formatResponse(reason="failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@router.post("/update")
+async def selfUpdate(request: Request,api_key: str = Header(..., alias="API-KEY")):
+    try:
+        return await auth.selfUpdate(api_key,request)
+    except Exception:
+        return utils.formatResponse(reason="Login failed",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 @router.put("/user/edit")
 async def routeEditUser(request: Request, api_key: str = Header(..., alias="API-KEY")):
     try:

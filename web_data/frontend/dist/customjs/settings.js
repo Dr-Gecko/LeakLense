@@ -7,16 +7,7 @@ async function update_profile_picture() {
         if (el) el.style.backgroundImage = bg;
     }
 }
-
-function throw_alert(reason,type){
-    Swal.fire({
-                position: "top-end",
-                title: reason,
-                showConfirmButton: false,
-                background: "#182433",
-                color: "#eeeeee",
-                icon: type,
-                timer: 1000})}
+function throw_alert(reason,type){Swal.fire({position: "top-end",title: reason,showConfirmButton: false,background: "#182433",color: "#eeeeee",icon: type,timer: 1000})}
 
 
 async function updateUserAvatar() {
@@ -55,16 +46,56 @@ async function updateUserAvatar() {
         }
     });
 }
-function changeUsername(newUsername) {
-    // TODO: replace with real API call
-    console.log("Changing username to:", newUsername);
-    throw_alert("Username updated", "success");
+async function changeUsername(newUsername) {
+    try {
+        const response = await fetch("/api/auth/update", {
+            method: "POST",
+            body: JSON.stringify({ "data": newUsername, "update":"username"}),
+            headers: {
+                "API-KEY": Cookies.get("auth"),
+                "Content-Type": "application/json"
+            }
+        });
+        const data = await response.json();
+        if (response.ok) {
+            await getUserInfo();
+            loadUserData();
+            throw_alert("Username updated", "success");
+        } else if (response.status === 400) {
+            throw_alert("Invalid API Key", "error");
+            window.location.href = "/sign-in";
+        } else {
+            throw_alert("Update Error", "error");
+        }
+    } catch (error) {
+        throw_alert("Update Error", "error");
+    }
 }
 
-function changePassword(newPassword) {
-    // TODO: replace with real API call
-    console.log("Changing password");
-    throw_alert("Password updated", "success");
+async function changePassword(newPassword) {
+    try {
+        const response = await fetch("/api/auth/update", {
+            method: "POST",
+            body: JSON.stringify({ "data": newPassword, "update":"password" }),
+            headers: {
+                "API-KEY": Cookies.get("auth"),
+                "Content-Type": "application/json"
+            }
+        });
+        const data = await response.json();
+        if (response.ok) {
+            await getUserInfo();
+            loadUserData();
+            throw_alert("Password updated", "success");
+        } else if (response.status === 400) {
+            throw_alert("Invalid API Key", "error");
+            window.location.href = "/sign-in";
+        } else {
+            throw_alert("Update Error", "error");
+        }
+    } catch (error) {
+        throw_alert("Update Error", "error");
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {

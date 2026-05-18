@@ -11,6 +11,7 @@ allowedSelfEditColumns = {
     "email",
     "avatar",
     "password",
+    "username"
 }
 allowedManagerEditColumns = {
     "email",
