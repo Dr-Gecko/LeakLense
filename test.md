@@ -8,6 +8,7 @@ layout: home
 ## Breaches database:
 
 ### Table Name: Breaches
+
 |Column Name|Type|Null|Notes|
 |---|---|---|---|
 |id|INT|N|Auto increment ID for each breach added to LeakLense|
@@ -17,7 +18,8 @@ layout: home
 |record_count|INT|Y|Count of entries in breach|
 |added_by|VARCHAR(255)|Y|User who added breach|
 
-### Table Name: <breach_name>
+### Table Name: <\breach_name\>
+
 Each breach you add gets a table
 |Column Name|Type|Null|Notes|
 |---|---|---|---|
