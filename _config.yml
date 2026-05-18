@@ -2,9 +2,7 @@ title: LeakLense Docs
 description: Documentation for LeakLense
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
-logo: "/assets/images/just-the-docs.png"
-
+url: https://dr-gecko.github.io/LeakLense/
 
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
