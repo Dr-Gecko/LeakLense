@@ -3,7 +3,7 @@ description: Documentation for LeakLense
 theme: just-the-docs
 
 url: https://dr-gecko.github.io/LeakLense/
-
+color_scheme: dark
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
 # Enable or disable the site search
