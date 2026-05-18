@@ -11,23 +11,12 @@ FLUSH PRIVILEGES;
 
 USE breaches;
 
-CREATE TABLE IF NOT EXISTS users (
-    uuid VARCHAR(255) NULL,
-    name VARCHAR(255) NULL,
-    address TEXT NULL,
-    email TEXT NULL,
-    phone TEXT NULL,
-    other_tables TEXT NULL,
-    breaches TEXT NULL,
-    extra LONGTEXT NULL
-);
-
 CREATE TABLE IF NOT EXISTS breaches (
+    id int NOT NULL auto_increment PRIMARY KEY,
     name VARCHAR(255) NULL,
     threat_actor VARCHAR(255) NULL,
-    date_added TIMESTAMP NOT NULL
-        DEFAULT CURRENT_TIMESTAMP
-        ON UPDATE CURRENT_TIMESTAMP,
+    date_added TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    record_count int NULL,
     added_by VARCHAR(255) NULL
 );
 

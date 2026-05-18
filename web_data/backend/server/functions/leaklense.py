@@ -17,7 +17,7 @@ async def top_stats_data():
     count = await database.fetch_one(count_query, database="breaches")
     breach_count = await database.fetch_one(breach_query, database="breaches")
     stats={"total_entries":count['records'],"breaches":breach_count['breaches']}
-    return utils.format_response(data=stats)
+    return utils.formatResponse(data=stats)
 
 
 
@@ -53,7 +53,7 @@ async def get_dashboard_data():
         "map": country_map,
     }
 
-    return utils.format_response(data=response_data)
+    return utils.formatResponse(data=response_data)
 
 async def get_dashboard_map_bounds_data(
     north: float,
