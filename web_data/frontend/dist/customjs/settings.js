@@ -55,12 +55,44 @@ async function updateUserAvatar() {
         }
     });
 }
+function changeUsername(newUsername) {
+    // TODO: replace with real API call
+    console.log("Changing username to:", newUsername);
+    throw_alert("Username updated", "success");
+}
+
+function changePassword(newPassword) {
+    // TODO: replace with real API call
+    console.log("Changing password");
+    throw_alert("Password updated", "success");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     updateUserAvatar();
     const userData = JSON.parse(localStorage.getItem("user") || "{}");
     const currentUsername = userData.username;
-    const usernameInput = document.getElementById("username_input");
+    const usernameInput = document.getElementById("usernameInput");
     if (usernameInput && currentUsername) {
         usernameInput.placeholder = currentUsername;
     }
+
+    document.getElementById("changeUsernameBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+        const newUsername = document.getElementById("usernameInput").value.trim();
+        if (!newUsername) {
+            throw_alert("Username cannot be empty", "error");
+            return;
+        }
+        changeUsername(newUsername);
+    });
+
+    document.getElementById("changePasswordBtn").addEventListener("click", function (e) {
+        e.preventDefault();
+        const newPassword = document.getElementById("passwordInput").value;
+        if (!newPassword) {
+            throw_alert("Password cannot be empty", "error");
+            return;
+        }
+        changePassword(newPassword);
+    });
 });
