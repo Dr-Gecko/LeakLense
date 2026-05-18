@@ -8,7 +8,15 @@ async function update_profile_picture() {
     }
 }
 
-function throw_alert(reason,type){Swal.fire({position: "top-end",title: reason,showConfirmButton: false,background: "#182433",color: "#eeeeee",icon: type,timer: 1000})}
+function throw_alert(reason,type){
+    Swal.fire({
+                position: "top-end",
+                title: reason,
+                showConfirmButton: false,
+                background: "#182433",
+                color: "#eeeeee",
+                icon: type,
+                timer: 1000})}
 
 
 async function updateUserAvatar() {
