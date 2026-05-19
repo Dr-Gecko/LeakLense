@@ -1,13 +1,9 @@
-import os
 from typing import Any
-from dotenv import load_dotenv
-from pydantic import BaseModel
 from fastapi import status
-from fastapi.responses import JSONResponse
-from fastapi.openapi.utils import get_openapi
-from datetime import datetime, date
 from decimal import Decimal
-load_dotenv()
+from datetime import datetime, date
+from fastapi.responses import JSONResponse
+
 allowedSelfEditColumns = {
     "email",
     "avatar",

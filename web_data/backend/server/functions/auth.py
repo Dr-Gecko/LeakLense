@@ -2,14 +2,13 @@ import os
 import time
 import argon2
 import datetime
-import traceback
 from uuid import uuid4
 from base64 import b64encode
 from fastapi import UploadFile
 from argon2 import PasswordHasher
+from fastapi import status,Request
 import functions.helpers.utils as utils
 import functions.helpers.database as database
-from fastapi import Response, status,Request
 import mysql.connector.errors as msqlerrors
 
 

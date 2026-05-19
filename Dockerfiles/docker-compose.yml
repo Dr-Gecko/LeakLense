@@ -6,7 +6,7 @@ services:
       - "80:80"
     volumes:
       - ${PWD}/../web_data/frontend:/usr/share/nginx/html
-      - ${PWD}/../web_data/frontend/static/avatars/useruploaded:/usr/share/nginx/html/static/avatars/useruploaded
+      - user-avatars:/usr/share/nginx/html/static/avatars/useruploaded
       - ${PWD}/../data/logs/:/var/log/nginx
       - ${PWD}/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
@@ -20,7 +20,7 @@ services:
       - "8081:8080"
     volumes:
       - ${PWD}/../web_data/backend/server:/app
-      - ${PWD}/../web_data/frontend/static/avatars/useruploaded/:/app/avatars
+      - user-avatars:/app/avatars
     working_dir: /app
     environment:
       mysql_host: ${mysql_host}
@@ -29,7 +29,7 @@ services:
       mysql_password: ${mysql_password}
       mysql_db: breaches
       mysql_backend_db: backend
-      SHARED_PUBLIC_DIR: /app/shared
+      SHARED_PUBLIC_DIR: /app/avatars
     command: uvicorn main:app --host 0.0.0.0 --port 8080 --reload
     depends_on:
       - mariadb
@@ -49,3 +49,5 @@ services:
       - ${PWD}/../data/mariadb:/var/lib/mysql
       - ${PWD}/mariadb-init:/docker-entrypoint-initdb.d:ro
     restart: unless-stopped
+volumes:
+  user-avatars:

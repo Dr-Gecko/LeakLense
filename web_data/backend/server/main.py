@@ -6,7 +6,6 @@ import functions.helpers.utils as utils
 
 from routes.authRoutes import router as authRouter
 from routes.leakRouter import router as leakRouter
-from routes.utilsRoutes import router as utilRouter
 
 app = FastAPI(docs_url=None, redoc_url=None)
 app.openapi = lambda: utils.custom_openapi(app)
@@ -19,4 +18,3 @@ app.add_middleware(
 )
 app.include_router(authRouter)
 app.include_router(leakRouter)
-app.include_router(utilRouter)

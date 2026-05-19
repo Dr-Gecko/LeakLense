@@ -1,10 +1,6 @@
 import asyncio
-import os
-from typing import Any, Sequence
-
 import mysql.connector
-import yaml
-from pathlib import Path
+from typing import Any, Sequence
 from functions.helpers.config import load_config
 
 
