@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkleak_lense_docs=self.webpackChunkleak_lense_docs||[]).push([["668"],{6569(e,s,r){r.r(s),r.d(s,{default:()=>t});var a=r(4848);r(6540);var c=r(4164),l=r(4308),n=r(8287),u=r(2831),d=r(1085);function t(e){return(0,a.jsx)(l.e3,{className:(0,c.A)(n.G.wrapper.docsPages),children:(0,a.jsx)(d.A,{children:(0,u.v)(e.route.routes)})})}}}]);
