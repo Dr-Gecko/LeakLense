@@ -32,8 +32,8 @@
 
 <body>
 	<script src="./dist/js/demo-theme.min.js"></script>
-	<script src="./dist/customjs/leaklense.js?v=1.0.30"></script>
-	<script src="./dist/customjs/dashboard.js?v=0.0.23"></script>
+	<script src="./dist/customjs/leaklense.js?v=1.0.31"></script>
+	<script src="./dist/customjs/dashboard.js?v=0.0.50"></script>
 	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
@@ -496,7 +496,7 @@
 											<h3 class="card-title">Locations</h3>
 											<div class="ratio ratio-21x9">
 												<div>
-													<div id="map-world" class="w-100 h-100"></div>
+													<div id="breach-map" class="w-100 h-100"></div>
 												</div>
 											</div>
 										</div>
@@ -542,62 +542,6 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12">
-							<div class="card">
-								<div class="card-header">
-									<h3 class="card-title">Invoices</h3>
-								</div>
-								<div class="card-body border-bottom py-3">
-									<div class="d-flex">
-										<div class="text-secondary">
-											Show
-											<div class="mx-2 d-inline-block">
-												<input type="text" class="form-control form-control-sm" value="8"
-													size="3" aria-label="Invoices count" id="table-entries">
-											</div>
-											entries
-										</div>
-										<div class="ms-auto text-secondary">
-											Search:
-											<div class="ms-2 d-inline-block">
-												<input type="text" class="form-control form-control-sm"
-													aria-label="Search invoice" id="table-search">
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="table-responsive">
-									<table
-										class="table table-selectable card-table table-vcenter text-nowrap datatable">
-										<thead>
-											<tr>
-												<th class="w-1" data-sort="no" style="cursor:pointer">No. <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="subject" style="cursor:pointer">Invoice Subject <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="client" style="cursor:pointer">Client <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="vat" style="cursor:pointer">VAT No. <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="created" style="cursor:pointer">Created <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="status" style="cursor:pointer">Status <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="price" style="cursor:pointer">Price <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody id="invoice-tbody">
-										</tbody>
-									</table>
-								</div>
-								<div class="card-footer">
-									<div class="row g-2 justify-content-center justify-content-sm-between">
-										<div class="col-auto d-flex align-items-center">
-											<p class="m-0 text-secondary" id="table-info"></strong></p>
-										</div>
-										<div class="col-auto">
-											<ul class="pagination m-0 ms-auto" id="table-pagination">
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -606,7 +550,7 @@
 					<div class="row text-center align-items-center flex-row-reverse">
 						<div class="col-lg-auto ms-lg-auto">
 							<ul class="list-inline list-inline-dots mb-0">
-								<li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank"
+								<li class="list-inline-item"><a href="https://dr-gecko.github.io/LeakLense" target="_blank"
 										class="link-secondary" rel="noopener">Documentation</a></li>
 								<li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a>
 								</li>
@@ -631,7 +575,7 @@
 						<div class="col-12 col-lg-auto mt-3 mt-lg-0">
 							<ul class="list-inline list-inline-dots mb-0">
 								<li class="list-inline-item">
-									Copyright &copy; 2025
+									Copyright &copy; 2026
 									<a href="." class="link-secondary">DrGecko</a>.
 									All rights reserved.
 								</li>
@@ -656,5 +600,4 @@
 	<script src="./dist/js/tabler.min.js" defer></script>
 	<script src="./dist/js/demo.min.js" defer></script>
 </body>
-
 </html>

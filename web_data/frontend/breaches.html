@@ -32,8 +32,8 @@
 
 <body>
 	<script src="./dist/js/demo-theme.min.js"></script>
-	<script src="./dist/customjs/leaklense.js?v=1.0.30"></script>
-	<script src="./dist/customjs/breaches.js?v=0.0.5"></script>
+	<script src="./dist/customjs/leaklense.js?v=1.0.31"></script>
+	<script src="./dist/customjs/breaches.js?v=0.0.30"></script>
 	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
@@ -190,127 +190,6 @@
 				<div class="container-xl">
 					<div class="row row-deck row-cards">
 						<div class="col-12">
-							<div class="row row-cards">
-								<div class="col-sm-6 col-lg-3">
-									<div class="card card-sm">
-										<div class="card-body">
-											<div class="row align-items-center">
-												<div class="col-auto">
-													<span class="bg-primary text-white avatar">
-														<!-- Download SVG icon from http://tabler.io/icons/icon/currency-dollar -->
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-															viewBox="0 0 24 24" fill="currentColor"
-															class="icon icon-tabler icons-tabler-filled icon-tabler-key">
-															<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-															<path
-																d="M14.52 2c1.029 0 2.015 .409 2.742 1.136l3.602 3.602a3.877 3.877 0 0 1 0 5.483l-2.643 2.643a3.88 3.88 0 0 1 -4.941 .452l-.105 -.078l-5.882 5.883a3 3 0 0 1 -1.68 .843l-.22 .027l-.221 .009h-1.172c-1.014 0 -1.867 -.759 -1.991 -1.823l-.009 -.177v-1.172c0 -.704 .248 -1.386 .73 -1.96l.149 -.161l.414 -.414a1 1 0 0 1 .707 -.293h1v-1a1 1 0 0 1 .883 -.993l.117 -.007h1v-1a1 1 0 0 1 .206 -.608l.087 -.1l1.468 -1.469l-.076 -.103a3.9 3.9 0 0 1 -.678 -1.963l-.007 -.236c0 -1.029 .409 -2.015 1.136 -2.742l2.643 -2.643a3.88 3.88 0 0 1 2.741 -1.136m.495 5h-.02a2 2 0 1 0 0 4h.02a2 2 0 1 0 0 -4" />
-														</svg>
-													</span>
-												</div>
-												<div class="col">
-													<div class="font-weight-medium">
-														Records
-													</div>
-													<div class="text-secondary" id="records_count">
-														<div class="placeholder placeholder-xs col-11"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 col-lg-3">
-									<div class="card card-sm">
-										<div class="card-body">
-											<div class="row align-items-center">
-												<div class="col-auto">
-													<span class="bg-green text-white avatar">
-														<!-- Download SVG icon from http://tabler.io/icons/icon/shopping-cart -->
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-															viewBox="0 0 24 24" fill="none" stroke="currentColor"
-															stroke-width="2" stroke-linecap="round"
-															stroke-linejoin="round"
-															class="icon icon-tabler icons-tabler-outline icon-tabler-ticket">
-															<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-															<path d="M15 5l0 2" />
-															<path d="M15 11l0 2" />
-															<path d="M15 17l0 2" />
-															<path
-																d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" />
-														</svg>
-													</span>
-												</div>
-												<div class="col">
-													<div class="font-weight-medium">
-														Breaches
-													</div>
-													<div class="text-secondary" id="breaches_count">
-														<div class="placeholder placeholder-xs col-11"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 col-lg-3">
-									<div class="card card-sm">
-										<div class="card-body">
-											<div class="row align-items-center">
-												<div class="col-auto">
-													<span class="bg-x text-white avatar">
-														<!-- Download SVG icon from http://tabler.io/icons/icon/brand-x -->
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-															viewBox="0 0 24 24" fill="none" stroke="currentColor"
-															stroke-width="2" stroke-linecap="round"
-															stroke-linejoin="round" class="icon icon-1">
-															<path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-															<path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
-														</svg>
-													</span>
-												</div>
-												<div class="col">
-													<div class="font-weight-medium">
-														623 Shares
-													</div>
-													<div class="text-secondary">
-														16 today
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6 col-lg-3">
-									<div class="card card-sm">
-										<div class="card-body">
-											<div class="row align-items-center">
-												<div class="col-auto">
-													<span class="bg-facebook text-white avatar">
-														<!-- Download SVG icon from http://tabler.io/icons/icon/brand-facebook -->
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-															viewBox="0 0 24 24" fill="none" stroke="currentColor"
-															stroke-width="2" stroke-linecap="round"
-															stroke-linejoin="round" class="icon icon-1">
-															<path
-																d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-														</svg>
-													</span>
-												</div>
-												<div class="col">
-													<div class="font-weight-medium">
-														132 Likes
-													</div>
-													<div class="text-secondary">
-														21 today
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">Breaches</h3>
@@ -339,15 +218,15 @@
 										class="table table-selectable card-table table-vcenter text-nowrap datatable">
 										<thead>
 											<tr>
-												<th class="w-1" data-sort="no" style="cursor:pointer">No. <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="subject" style="cursor:pointer">Breach Victim <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="client" style="cursor:pointer">Threat Actor <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="vat" style="cursor:pointer">Record Count<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
-												<th data-sort="created" style="cursor:pointer">Ingest Date <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
+												<th class="w-1" data-sort="id" style="cursor:pointer">No. <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
+												<th data-sort="name" style="cursor:pointer">Breach Victim <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
+												<th data-sort="threat_actor" style="cursor:pointer">Threat Actor <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
+												<th data-sort="record_count" style="cursor:pointer">Record Count<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
+												<th data-sort="date_added" style="cursor:pointer">Ingest Date <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sort-icon" style="opacity:0.3;transition:transform 0.15s,opacity 0.15s;vertical-align:middle"><path d="M6 15l6 -6l6 6"></path></svg></th>
 												<th></th>
 											</tr>
 										</thead>
-										<tbody id="invoice-tbody">
+										<tbody id="breach-tbody">
 										</tbody>
 									</table>
 								</div>

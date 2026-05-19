@@ -1,9 +1,11 @@
+import os
 import time
 import argon2
 import datetime
 import traceback
 from uuid import uuid4
 from base64 import b64encode
+from fastapi import UploadFile
 from argon2 import PasswordHasher
 import functions.helpers.utils as utils
 import functions.helpers.database as database
@@ -24,7 +26,7 @@ async def createUser(request:Request):
         else: return utils.formatResponse(reason="failed to create user",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     except msqlerrors.IntegrityError as error: 
         if error.errno == 1062: return utils.formatResponse(reason="username already exists",status_code=status.HTTP_409_CONFLICT)
-    except Exception: utils.formatResponse(reason="failed to create user",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    except Exception: return utils.formatResponse(reason="failed to create user",status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 async def loginUser(request:Request):
     try:
@@ -147,3 +149,19 @@ async def deleteUser(authToken, request:Request):
     except Exception as error:
         return False,utils.formatResponse({"response":"failed"},status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+async def updateAvatar(request, authToken, uploadedFile : UploadFile):
+    try:
+        verified = await verifyAuthRole(authToken)      
+        if verified[0]!=True: 
+            return verified[1] 
+        with open(f"/app/avatars/{verified[1]}{os.path.splitext(uploadedFile.filename)[1]}", "wb") as buffer:
+            buffer.write(await uploadedFile.read())
+        buffer.close()
+        public_path = f"/static/avatars/useruploaded/{verified[1]}{os.path.splitext(uploadedFile.filename)[1]}"
+        await _updateUserColumn(verified[3], "user_avatar_path", public_path)
+        return utils.formatResponse({"avatar_path": public_path})
+    except TypeError:
+        return False,utils.formatResponse({"response":"API key invalid"},status_code=status.HTTP_401_UNAUTHORIZED)
+    except Exception as error:
+        return False,utils.formatResponse({"response":"failed"},status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
