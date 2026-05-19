@@ -1,46 +1,30 @@
 title: LeakLense Docs
 description: Documentation for LeakLense
+theme: just-the-docs
 
-remote_theme: just-the-docs/just-the-docs
-
-url: "https://dr-gecko.github.io"
-baseurl: "/LeakLense"
-
-permalink: pretty
-
-plugins:
-- jekyll-remote-theme
-- jekyll-seo-tag
-- jekyll-sitemap
-
-search_enabled: true
-enable_copy_code_button: true
-heading_anchors: true
-
-back_to_top: true
-back_to_top_text: "Back to top"
-
+url: https://dr-gecko.github.io/LeakLense/
+color_scheme: dark
 aux_links:
-  "LeakLense on GitHub":
-  - "https://github.com/dr-gecko/LeakLense"
+  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+# Enable or disable the site search
+# Supports true (default) or false
+search_enabled: true
 
-gh_edit_link: true
-gh_edit_link_text: "Edit this page on GitHub"
-gh_edit_repository: "https://github.com/dr-gecko/LeakLense"
-gh_edit_branch: "main"
-gh_edit_view_mode: "tree"
+search:
+  heading_level: 4
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+  tokenizer_separator: /[\s/]+/
+  rel_url: true
+  button: false
+  focus_shortcut_key: 'k'
 
-color_scheme: nil
-
+mermaid:
+  version: "9.1.3"
 defaults:
 - scope:
     path: "docs"
     type: "pages"
   values:
     layout: "default"
-
-exclude:
-- Gemfile
-- Gemfile.lock
-- node_modules/
-- vendor/
