@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkleak_lense_docs=self.webpackChunkleak_lense_docs||[]).push([["2708"],{6207(e){e.exports=JSON.parse('{"metadata":{"permalink":"/LeakLense/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
