@@ -6,8 +6,6 @@ url: https://dr-gecko.github.io/LeakLense/
 color_scheme: dark
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
-# Enable or disable the site search
-# Supports true (default) or false
 search_enabled: true
 
 search:
